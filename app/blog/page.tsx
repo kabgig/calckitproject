@@ -1,4 +1,5 @@
 import { Suspense } from 'react';
+import { Metadata } from 'next';
 import { Box, Heading, SimpleGrid, Text, VStack, HStack } from '@chakra-ui/react';
 import Link from 'next/link';
 import { FlatCard } from '@/components/ui/FlatCard';
@@ -7,17 +8,28 @@ import { getAllArticles, type ArticleMetadata } from '@/lib/utils/articles';
 
 const ARTICLES_PER_PAGE = 7;
 
-export const metadata = {
-  title: 'Blog - Free Calculator Guides | CalcKit.us',
-  description: 'Expert guides on mortgage calculations, APY optimization, and financial planning. Learn how to maximize your savings and make informed decisions.',
-};
-
-interface BlogPageProps {
-  searchParams: { page?: string };
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: Promise<{ page?: string }>;
+}): Promise<Metadata> {
+  const params = await searchParams;
+  const currentPage = Number(params.page) || 1;
+  const pageTitle = currentPage > 1 ? `Financial Guides - Page ${currentPage}` : 'Financial Guides & Tutorials';
+  
+  return {
+    title: pageTitle,
+    description: 'Expert guides on mortgage calculations, APY optimization, and financial planning. Learn how to maximize your savings and make informed home buying decisions.',
+  };
 }
 
-export default function BlogPage({ searchParams }: BlogPageProps) {
-  const currentPage = Number(searchParams.page) || 1;
+interface BlogPageProps {
+  searchParams: Promise<{ page?: string }>;
+}
+
+export default async function BlogPage({ searchParams }: BlogPageProps) {
+  const params = await searchParams;
+  const currentPage = Number(params.page) || 1;
   const allArticles = getAllArticles();
   
   const totalPages = Math.ceil(allArticles.length / ARTICLES_PER_PAGE);

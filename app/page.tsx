@@ -8,10 +8,21 @@ import {
   Button,
   Badge,
 } from '@chakra-ui/react';
+import { Metadata } from 'next';
 import Link from 'next/link';
 import { FlatCard } from '@/components/ui/FlatCard';
 import { AdPlaceholder } from '@/components/shared/AdPlaceholder';
 import { getAllArticles } from '@/lib/utils/articles';
+
+export const metadata: Metadata = {
+  title: 'CalcKit.us - Free Financial Calculators & Expert Guides',
+  description: 'Free mortgage and APY calculators with comprehensive guides. Calculate monthly payments, amortization schedules, compound interest, and more. Make smarter financial decisions with our expert tools and articles.',
+  openGraph: {
+    title: 'CalcKit.us - Free Financial Calculators & Expert Guides',
+    description: 'Free mortgage and APY calculators with comprehensive guides.',
+    url: 'https://calckit.us',
+  },
+};
 
 export default function Home() {
   // Get 4 most recent articles

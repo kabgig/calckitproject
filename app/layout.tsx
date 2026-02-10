@@ -7,16 +7,47 @@ import { GoogleAnalytics } from "@/components/shared/GoogleAnalytics";
 import { Flex } from "@chakra-ui/react";
 
 export const metadata: Metadata = {
-  title: "CalcKit.us - Free Financial Calculators",
-  description: "Free mortgage and APY calculators with comprehensive guides. Calculate monthly payments, amortization schedules, and compound interest.",
-  keywords: ["mortgage calculator", "APY calculator", "financial calculator", "amortization schedule", "compound interest"],
+  metadataBase: new URL('https://calckit.us'),
+  title: {
+    default: "CalcKit.us - Free Financial Calculators & Expert Guides",
+    template: "%s | CalcKit.us",
+  },
+  description: "Free mortgage and APY calculators with comprehensive guides. Calculate monthly payments, amortization schedules, and compound interest. Expert financial planning tools.",
+  keywords: ["mortgage calculator", "APY calculator", "financial calculator", "amortization schedule", "compound interest", "home loan calculator", "savings calculator"],
+  authors: [{ name: "CalcKit.us" }],
+  creator: "CalcKit.us",
+  publisher: "CalcKit.us",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   openGraph: {
-    title: "CalcKit.us - Free Financial Calculators",
-    description: "Free mortgage and APY calculators with comprehensive guides",
+    title: "CalcKit.us - Free Financial Calculators & Expert Guides",
+    description: "Free mortgage and APY calculators with comprehensive guides. Calculate monthly payments, amortization schedules, and compound interest.",
     url: "https://calckit.us",
     siteName: "CalcKit.us",
     locale: "en_US",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "CalcKit.us - Free Financial Calculators",
+    description: "Free mortgage and APY calculators with comprehensive guides",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    google: 'your-google-verification-code',
   },
 };
 

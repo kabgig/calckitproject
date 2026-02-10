@@ -26,9 +26,10 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
-  const article = getArticleBySlug(params.slug);
+  const { slug } = await params;
+  const article = getArticleBySlug(slug);
 
   if (!article) {
     return {
@@ -45,12 +46,20 @@ export async function generateMetadata({
       description: article.metadata.description,
       type: 'article',
       publishedTime: article.metadata.date,
+      url: `https://calckit.us/blog/${slug}`,
+      siteName: 'CalcKit.us',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: article.metadata.title,
+      description: article.metadata.description,
     },
   };
 }
 
-export default function ArticlePage({ params }: { params: { slug: string } }) {
-  const article = getArticleBySlug(params.slug);
+export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const article = getArticleBySlug(slug);
 
   if (!article) {
     notFound();
