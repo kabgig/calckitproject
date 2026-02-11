@@ -102,15 +102,20 @@ export function Header() {
                   const meta = categoryMeta[cat];
 
                   return (
-                    <MenuGroup
-                      key={cat}
-                      title={meta.label}
-                      fontSize="xs"
-                      fontWeight="extrabold"
-                      color="gray.900"
-                      textTransform="uppercase"
-                      letterSpacing="wide"
-                    >
+                    <Box key={cat}>
+                      <Flex align="center" px={3} pt={3} pb={1} gap={2}>
+                        <Text
+                          fontSize="xs"
+                          fontWeight="extrabold"
+                          color="gray.900"
+                          textTransform="uppercase"
+                          letterSpacing="wide"
+                          whiteSpace="nowrap"
+                        >
+                          {meta.label}
+                        </Text>
+                        <Box flex="1" h="1px" bg="gray.300" />
+                      </Flex>
                       {calcs.map((c) => (
                         <MenuItem
                           key={c.slug}
@@ -122,7 +127,7 @@ export function Header() {
                           {c.icon} {c.name}
                         </MenuItem>
                       ))}
-                    </MenuGroup>
+                    </Box>
                   );
                 })}
               </MenuList>
