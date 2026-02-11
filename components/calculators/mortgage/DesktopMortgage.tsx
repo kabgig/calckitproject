@@ -14,10 +14,10 @@ import {
   Flex,
   Divider,
 } from '@chakra-ui/react';
-import { FlatInput } from '@/components/ui/FlatInput';
-import { FlatButton } from '@/components/ui/FlatButton';
-import { FlatCard } from '@/components/ui/FlatCard';
-import { FlatTable } from '@/components/ui/FlatTable';
+import { ModernInput } from '@/components/ui/ModernInput';
+import { ModernButton } from '@/components/ui/ModernButton';
+import { ModernCard } from '@/components/ui/ModernCard';
+import { ModernTable } from '@/components/ui/ModernTable';
 import { PDFExportButton } from '@/components/calculators/shared/PDFExportButton';
 import { mortgageSchema, type MortgageFormData } from '@/lib/validation';
 import {
@@ -68,12 +68,12 @@ export function DesktopMortgage() {
       <Flex gap={8} align="flex-start">
         {/* Left: Input Form (30%) - Sticky */}
         <Box width="30%" position="sticky" top="20px">
-          <FlatCard>
+          <ModernCard>
             <form onSubmit={handleSubmit(onSubmit)}>
               <VStack spacing={4}>
                 <FormControl isInvalid={!!errors.amount}>
-                  <FormLabel>Loan Amount ($)</FormLabel>
-                  <FlatInput
+                  <FormLabel fontWeight="semibold">Loan Amount ($)</FormLabel>
+                  <ModernInput
                     type="number"
                     placeholder="300000"
                     {...register('amount', { valueAsNumber: true })}
@@ -84,8 +84,8 @@ export function DesktopMortgage() {
                 </FormControl>
 
                 <FormControl isInvalid={!!errors.rate}>
-                  <FormLabel>Interest Rate (%)</FormLabel>
-                  <FlatInput
+                  <FormLabel fontWeight="semibold">Interest Rate (%)</FormLabel>
+                  <ModernInput
                     type="number"
                     step="0.01"
                     placeholder="4.5"
@@ -97,8 +97,8 @@ export function DesktopMortgage() {
                 </FormControl>
 
                 <FormControl isInvalid={!!errors.years}>
-                  <FormLabel>Loan Term (Years)</FormLabel>
-                  <FlatInput
+                  <FormLabel fontWeight="semibold">Loan Term (Years)</FormLabel>
+                  <ModernInput
                     type="number"
                     placeholder="30"
                     {...register('years', { valueAsNumber: true })}
@@ -109,8 +109,8 @@ export function DesktopMortgage() {
                 </FormControl>
 
                 <FormControl isInvalid={!!errors.startDate}>
-                  <FormLabel>Start Date</FormLabel>
-                  <FlatInput
+                  <FormLabel fontWeight="semibold">Start Date</FormLabel>
+                  <ModernInput
                     type="date"
                     {...register('startDate', { valueAsDate: true })}
                   />
@@ -119,12 +119,12 @@ export function DesktopMortgage() {
                   )}
                 </FormControl>
 
-                <FlatButton type="submit" width="full" mt={2}>
+                <ModernButton type="submit" width="full" mt={2}>
                   Calculate
-                </FlatButton>
+                </ModernButton>
               </VStack>
             </form>
-          </FlatCard>
+          </ModernCard>
         </Box>
 
         {/* Right: Results & Table (70%) */}
@@ -132,9 +132,9 @@ export function DesktopMortgage() {
           {results ? (
             <Box id="mortgage-results-desktop">
               {/* Results Summary */}
-              <FlatCard mb={6}>
+              <ModernCard mb={6}>
                 <VStack spacing={4} align="stretch">
-                  <Heading size="md">Results</Heading>
+                  <Heading size="md" color="gray.900">Results</Heading>
                   <Box>
                     <Text fontSize="sm" color="gray.600">
                       Monthly Payment
@@ -163,7 +163,7 @@ export function DesktopMortgage() {
                     </Box>
                   </Flex>
                 </VStack>
-              </FlatCard>
+              </ModernCard>
 
               {/* Amortization Schedule */}
               <Box>
@@ -171,7 +171,7 @@ export function DesktopMortgage() {
                   Amortization Schedule
                 </Heading>
                 <Box maxH="600px" overflowY="auto">
-                  <FlatTable
+                  <ModernTable
                     headers={['#', 'Date', 'Principal', 'Interest', 'Balance']}
                     data={results.schedule.map((row) => [
                       row.paymentNum,
@@ -193,13 +193,13 @@ export function DesktopMortgage() {
               </Box>
             </Box>
           ) : (
-            <FlatCard>
+            <ModernCard>
               <VStack spacing={2} align="center" justify="center" minH="400px">
                 <Text color="gray.600" fontSize="lg">
                   Enter loan details and click Calculate to see results
                 </Text>
               </VStack>
-            </FlatCard>
+            </ModernCard>
           )}
         </Box>
       </Flex>

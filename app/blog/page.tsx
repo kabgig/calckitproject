@@ -1,9 +1,9 @@
 import { Suspense } from 'react';
 import { Metadata } from 'next';
-import { Box, Heading, SimpleGrid, Text, VStack, HStack } from '@chakra-ui/react';
+import { Box, Heading, SimpleGrid, Text, VStack, HStack, Badge } from '@chakra-ui/react';
 import Link from 'next/link';
-import { FlatCard } from '@/components/ui/FlatCard';
-import { FlatButton } from '@/components/ui/FlatButton';
+import { ModernCard } from '@/components/ui/ModernCard';
+import { ModernButton } from '@/components/ui/ModernButton';
 import { getAllArticles, type ArticleMetadata } from '@/lib/utils/articles';
 
 const ARTICLES_PER_PAGE = 7;
@@ -41,10 +41,10 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
     <Box maxW="1200px" mx="auto" p={{ base: 4, md: 8 }} py={8}>
       <VStack spacing={8} align="stretch">
         <Box textAlign="center">
-          <Heading size="2xl" mb={4}>
+          <Heading size="2xl" mb={4} fontWeight="extrabold" color="gray.900">
             Financial Guides & Insights
           </Heading>
-          <Text fontSize="lg" color="gray.700">
+          <Text fontSize="lg" color="gray.600" fontWeight="medium">
             Expert articles on mortgages, savings optimization, and financial planning
           </Text>
         </Box>
@@ -60,17 +60,17 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
           <HStack justify="center" spacing={4} mt={8}>
             {currentPage > 1 && (
               <Link href={`/blog?page=${currentPage - 1}`}>
-                <FlatButton variant="outline">← Previous</FlatButton>
+                <ModernButton variant="outline" colorScheme="gray">← Previous</ModernButton>
               </Link>
             )}
             
-            <Text fontWeight="bold">
+            <Text fontWeight="bold" color="gray.700">
               Page {currentPage} of {totalPages}
             </Text>
             
             {currentPage < totalPages && (
               <Link href={`/blog?page=${currentPage + 1}`}>
-                <FlatButton variant="outline">Next →</FlatButton>
+                <ModernButton variant="outline" colorScheme="gray">Next →</ModernButton>
               </Link>
             )}
           </HStack>
@@ -83,30 +83,30 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
 function ArticleCard({ article }: { article: ArticleMetadata }) {
   return (
     <Link href={`/blog/${article.slug}`} style={{ textDecoration: 'none' }}>
-      <FlatCard
-        _hover={{ borderColor: 'gray.900', transform: 'translateY(-2px)' }}
-        transition="all 0.2s"
+      <ModernCard
         h="full"
         display="flex"
         flexDirection="column"
       >
         <VStack align="stretch" spacing={3} flex={1}>
-          <Box
-            bg={article.category === 'mortgage' ? 'gray.100' : 'gray.200'}
+          <Badge
+            bg={article.category === 'mortgage' ? 'purple.100' : 'blue.100'}
+            color={article.category === 'mortgage' ? 'purple.700' : 'blue.700'}
             px={3}
             py={1}
             w="fit-content"
             fontWeight="bold"
             fontSize="sm"
+            borderRadius="full"
           >
             {article.category.toUpperCase()}
-          </Box>
+          </Badge>
           
-          <Heading size="md" noOfLines={2}>
+          <Heading size="md" noOfLines={2} color="gray.900">
             {article.title}
           </Heading>
           
-          <Text fontSize="sm" color="gray.700" noOfLines={3} flex={1}>
+          <Text fontSize="sm" color="gray.600" noOfLines={3} flex={1}>
             {article.description}
           </Text>
           
@@ -118,12 +118,12 @@ function ArticleCard({ article }: { article: ArticleMetadata }) {
                 day: 'numeric',
               })}
             </Text>
-            <Text fontSize="sm" fontWeight="bold">
+            <Text fontSize="sm" fontWeight="bold" color="brand.500">
               Read More →
             </Text>
           </HStack>
         </VStack>
-      </FlatCard>
+      </ModernCard>
     </Link>
   );
 }

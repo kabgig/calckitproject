@@ -14,10 +14,10 @@ import {
   Select,
   Divider,
 } from '@chakra-ui/react';
-import { FlatInput } from '@/components/ui/FlatInput';
-import { FlatButton } from '@/components/ui/FlatButton';
-import { FlatCard } from '@/components/ui/FlatCard';
-import { FlatTable } from '@/components/ui/FlatTable';
+import { ModernInput } from '@/components/ui/ModernInput';
+import { ModernButton } from '@/components/ui/ModernButton';
+import { ModernCard } from '@/components/ui/ModernCard';
+import { ModernTable } from '@/components/ui/ModernTable';
 import { PDFExportButton } from '@/components/calculators/shared/PDFExportButton';
 import { apySchema, type APYFormData } from '@/lib/validation';
 import { calculateAPY, generateAPYGrowthTable, type GrowthRow } from '@/lib/utils/calc';
@@ -64,12 +64,12 @@ export function MobileAPY() {
         APY Calculator
       </Heading>
 
-      <FlatCard>
+      <ModernCard>
         <form onSubmit={handleSubmit(onSubmit)}>
           <VStack spacing={4}>
             <FormControl isInvalid={!!errors.apr}>
-              <FormLabel>APR (%)</FormLabel>
-              <FlatInput
+              <FormLabel fontWeight="semibold">APR (%)</FormLabel>
+              <ModernInput
                 type="number"
                 step="0.01"
                 placeholder="5.0"
@@ -104,8 +104,8 @@ export function MobileAPY() {
 
             {compoundFrequency === 'custom' && (
               <FormControl isInvalid={!!errors.customN}>
-                <FormLabel>Custom Compounds Per Year</FormLabel>
-                <FlatInput
+                <FormLabel fontWeight="semibold">Custom Compounds Per Year</FormLabel>
+                <ModernInput
                   type="number"
                   placeholder="26"
                   {...register('customN', { valueAsNumber: true })}
@@ -117,8 +117,8 @@ export function MobileAPY() {
             )}
 
             <FormControl isInvalid={!!errors.principal}>
-              <FormLabel>Initial Principal ($)</FormLabel>
-              <FlatInput
+              <FormLabel fontWeight="semibold">Initial Principal ($)</FormLabel>
+              <ModernInput
                 type="number"
                 placeholder="10000"
                 {...register('principal', { valueAsNumber: true })}
@@ -129,8 +129,8 @@ export function MobileAPY() {
             </FormControl>
 
             <FormControl isInvalid={!!errors.projectionYears}>
-              <FormLabel>Projection Years</FormLabel>
-              <FlatInput
+              <FormLabel fontWeight="semibold">Projection Years</FormLabel>
+              <ModernInput
                 type="number"
                 placeholder="5"
                 {...register('projectionYears', { valueAsNumber: true })}
@@ -142,18 +142,18 @@ export function MobileAPY() {
               )}
             </FormControl>
 
-            <FlatButton type="submit" width="full" mt={2}>
+            <ModernButton type="submit" width="full" mt={2}>
               Calculate APY
-            </FlatButton>
+            </ModernButton>
           </VStack>
         </form>
-      </FlatCard>
+      </ModernCard>
 
       {results && (
         <Box id="apy-results">
-          <FlatCard>
+          <ModernCard>
             <VStack spacing={4} align="stretch">
-              <Heading size="md">Results</Heading>
+              <Heading size="md" color="gray.900">Results</Heading>
               <Box>
                 <Text fontSize="sm" color="gray.600">
                   Annual Percentage Yield (APY)
@@ -163,13 +163,13 @@ export function MobileAPY() {
                 </Text>
               </Box>
             </VStack>
-          </FlatCard>
+          </ModernCard>
 
           <Box mt={6}>
             <Heading size="md" mb={4}>
               Growth Projection
             </Heading>
-            <FlatTable
+            <ModernTable
               headers={['Year', 'Balance']}
               data={results.growthTable.map((row) => [
                 row.year,

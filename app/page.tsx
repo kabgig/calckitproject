@@ -10,9 +10,9 @@ import {
 } from '@chakra-ui/react';
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { FlatCard } from '@/components/ui/FlatCard';
+import { ModernCard } from '@/components/ui/ModernCard';
 import { AdPlaceholder } from '@/components/shared/AdPlaceholder';
-import { getAllArticles } from '@/lib/utils/articles';
+import { getAllArticles } from'@/lib/utils/articles';
 
 export const metadata: Metadata = {
   title: 'CalcKit.us - Free Financial Calculators & Expert Guides',
@@ -32,12 +32,20 @@ export default function Home() {
     <Container maxW="container.xl" py={12}>
       <VStack spacing={16} align="stretch">
         {/* Hero Section */}
-        <Box textAlign="center" py={8}>
+        <Box
+          textAlign="center"
+          py={16}
+          px={8}
+          bgGradient="linear(to-br, brand.50, purple.50, blue.50)"
+          borderRadius="3xl"
+        >
           <Heading
             as="h1"
             fontSize={{ base: '4xl', md: '5xl', lg: '6xl' }}
             mb={4}
-            color="black"
+            fontWeight="extrabold"
+            bgGradient="linear(to-r, brand.600, purple.600)"
+            bgClip="text"
           >
             CalcKit.us
           </Heading>
@@ -55,17 +63,17 @@ export default function Home() {
 
         {/* Calculator Teasers */}
         <Box>
-          <Heading as="h2" size="xl" mb={6} color="black">
+          <Heading as="h2" size="xl" mb={6} color="gray.900" fontWeight="bold">
             Financial Calculators
           </Heading>
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6}>
             {/* Mortgage Calculator Card */}
-            <FlatCard p={8} _hover={{ bg: 'gray.50' }} transition="all 0.2s">
+            <ModernCard p={8} bg="purple.50" border="1px" borderColor="purple.100">
               <VStack align="stretch" spacing={4} h="100%">
-                <Heading as="h3" size="lg" color="black">
+                <Heading as="h3" size="lg" color="gray.900" fontWeight="bold">
                   Mortgage Calculator
                 </Heading>
-                <Text color="gray.700" flex={1}>
+                <Text color="gray.700" flex={1} fontSize="md">
                   Calculate your monthly mortgage payment and generate a
                   complete amortization schedule. See how principal and interest
                   change over time and export your results to PDF.
@@ -76,25 +84,24 @@ export default function Home() {
                       as="a"
                       w="full"
                       size="lg"
-                      bg="black"
+                      bg="brand.500"
                       color="white"
-                      borderRadius={0}
-                      _hover={{ bg: 'gray.800' }}
+                      _hover={{ bg: 'brand.600', transform: 'translateY(-2px)', boxShadow: 'lg' }}
                     >
                       Calculate Mortgage Payment →
                     </Button>
                   </Link>
                 </Box>
               </VStack>
-            </FlatCard>
+            </ModernCard>
 
             {/* APY Calculator Card */}
-            <FlatCard p={8} _hover={{ bg: 'gray.50' }} transition="all 0.2s">
+            <ModernCard p={8} bg="blue.50" border="1px" borderColor="blue.100">
               <VStack align="stretch" spacing={4} h="100%">
-                <Heading as="h3" size="lg" color="black">
+                <Heading as="h3" size="lg" color="gray.900" fontWeight="bold">
                   APY Calculator
                 </Heading>
-                <Text color="gray.700" flex={1}>
+                <Text color="gray.700" flex={1} fontSize="md">
                   Calculate Annual Percentage Yield (APY) with different
                   compounding frequencies. See how your savings grow over time
                   and compare rates across different accounts.
@@ -105,17 +112,16 @@ export default function Home() {
                       as="a"
                       w="full"
                       size="lg"
-                      bg="black"
+                      bg="brand.500"
                       color="white"
-                      borderRadius={0}
-                      _hover={{ bg: 'gray.800' }}
+                      _hover={{ bg: 'brand.600', transform: 'translateY(-2px)', boxShadow: 'lg' }}
                     >
                       Calculate APY →
                     </Button>
                   </Link>
                 </Box>
               </VStack>
-            </FlatCard>
+            </ModernCard>
           </SimpleGrid>
         </Box>
 
@@ -124,10 +130,10 @@ export default function Home() {
 
         {/* Recent Articles */}
         <Box>
-          <Heading as="h2" size="xl" mb={2} color="black">
+          <Heading as="h2" size="xl" mb={2} color="gray.900" fontWeight="bold">
             Expert Financial Guides
           </Heading>
-          <Text fontSize="lg" color="gray.600" mb={6}>
+          <Text fontSize="lg" color="gray.600" mb={6} fontWeight="medium">
             Learn from comprehensive guides written to help you master financial
             calculations and planning.
           </Text>
@@ -137,27 +143,25 @@ export default function Home() {
             mb={6}
           >
             {recentArticles.map((article) => (
-              <FlatCard
+              <ModernCard
                 key={article.slug}
                 p={6}
-                _hover={{ bg: 'gray.50' }}
-                transition="all 0.2s"
+                bg="white"
               >
                 <VStack align="stretch" spacing={3} h="100%">
                   <Badge
                     fontSize="xs"
-                    px={2}
+                    px={3}
                     py={1}
-                    border="1px solid"
-                    borderColor="gray.300"
-                    bg="white"
-                    color="black"
-                    borderRadius={0}
+                    bg={article.category === 'mortgage' ? 'purple.100' : 'blue.100'}
+                    color={article.category === 'mortgage' ? 'purple.700' : 'blue.700'}
+                    borderRadius="full"
                     alignSelf="flex-start"
+                    fontWeight="medium"
                   >
                     {article.category}
                   </Badge>
-                  <Heading as="h3" size="md" color="black">
+                  <Heading as="h3" size="md" color="gray.900" fontWeight="bold">
                     {article.title}
                   </Heading>
                   <Text color="gray.700" fontSize="sm" flex={1}>
@@ -175,16 +179,15 @@ export default function Home() {
                       as="a"
                       size="sm"
                       variant="outline"
-                      borderColor="black"
-                      color="black"
-                      borderRadius={0}
-                      _hover={{ bg: 'gray.100' }}
+                      borderColor="gray.300"
+                      color="gray.700"
+                      _hover={{ bg: 'gray. 100', borderColor: 'gray.400' }}
                     >
                       Read Article →
                     </Button>
                   </Link>
                 </VStack>
-              </FlatCard>
+              </ModernCard>
             ))}
           </SimpleGrid>
           <Box textAlign="center">
@@ -193,10 +196,9 @@ export default function Home() {
                 as="a"
                 size="lg"
                 variant="outline"
-                borderColor="black"
-                color="black"
-                borderRadius={0}
-                _hover={{ bg: 'gray.100' }}
+                borderColor="gray.300"
+                color="gray.700"
+                _hover={{ bg: 'gray.100', borderColor: 'gray.400', transform: 'translateY(-1px)' }}
               >
                 View All Articles →
               </Button>

@@ -107,16 +107,15 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
               fontSize="sm"
               px={3}
               py={1}
-              border="1px solid"
-              borderColor="gray.300"
-              bg="white"
-              color="black"
-              borderRadius={0}
+              bg={article.metadata.category === 'mortgage' ? 'purple.100' : 'blue.100'}
+              color={article.metadata.category === 'mortgage' ? 'purple.700' : 'blue.700'}
+              borderRadius="full"
+              fontWeight="bold"
               mb={4}
             >
               {article.metadata.category}
             </Badge>
-            <Heading as="h1" size="2xl" mb={4} color="black">
+            <Heading as="h1" size="2xl" mb={4} color="gray.900" fontWeight="extrabold">
               {article.metadata.title}
             </Heading>
             <Text fontSize="lg" color="gray.600" mb={2}>
@@ -212,13 +211,13 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 
           {/* Related Calculator CTA */}
           <Box
-            p={6}
-            border="2px solid"
-            borderColor="black"
-            bg="gray.50"
+            p={8}
+            borderRadius="2xl"
+            bgGradient="linear(to-br, brand.50, purple.50)"
             textAlign="center"
+            boxShadow="md"
           >
-            <Heading as="h3" size="lg" mb={3} color="black">
+            <Heading as="h3" size="lg" mb={3} color="gray.900" fontWeight="bold">
               Try Our {relatedCalculator.name}
             </Heading>
             <Text mb={4} color="gray.700">
@@ -228,10 +227,11 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
               <Button
                 as="a"
                 size="lg"
-                bg="black"
+                bg="brand.500"
                 color="white"
-                borderRadius={0}
-                _hover={{ bg: 'gray.800' }}
+                borderRadius="lg"
+                _hover={{ bg: 'brand.600', transform: 'translateY(-2px)', boxShadow: 'lg' }}
+                transition="all 0.2s"
                 px={8}
               >
                 Go to {relatedCalculator.name}
@@ -245,10 +245,10 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
               <Button
                 as="a"
                 variant="outline"
-                borderColor="black"
-                color="black"
-                borderRadius={0}
-                _hover={{ bg: 'gray.100' }}
+                borderColor="gray.300"
+                color="gray.700"
+                borderRadius="md"
+                _hover={{ bg: 'gray.50' }}
               >
                 ← Back to All Articles
               </Button>

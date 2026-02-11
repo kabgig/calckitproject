@@ -32,9 +32,10 @@ export function Header() {
       as="header"
       bg="white"
       borderBottom="1px solid"
-      borderColor="black"
+      borderColor="gray.200"
       px={{ base: 4, md: 8 }}
       py={4}
+      boxShadow="sm"
     >
       <Flex justify="space-between" align="center" maxW="1200px" mx="auto">
         {/* Logo/Brand - Left on desktop/tablet, center on mobile */}
@@ -44,7 +45,10 @@ export function Header() {
             href="/"
             fontSize="xl"
             fontWeight="bold"
-            _hover={{ textDecoration: 'none' }}
+            color="gray.900"
+            bgGradient="linear(to-r, brand.600, purple.600)"
+            bgClip="text"
+            _hover={{ textDecoration: 'none', opacity: 0.8 }}
           >
             CalcKit.us
           </Link>
