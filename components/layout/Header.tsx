@@ -106,9 +106,10 @@ export function Header() {
                       key={cat}
                       title={meta.label}
                       fontSize="xs"
-                      fontWeight="bold"
-                      color="gray.500"
+                      fontWeight="extrabold"
+                      color="gray.900"
                       textTransform="uppercase"
+                      letterSpacing="wide"
                     >
                       {calcs.map((c) => (
                         <MenuItem
@@ -134,6 +135,16 @@ export function Header() {
               _hover={{ textDecoration: 'none', color: 'gray.700' }}
             >
               Blog
+            </Link>
+
+            <Link
+              href="mailto:ansar_dev@icloud.com?subject=CalcKit.us%20Bug%20Report"
+              fontWeight="medium"
+              color="red.500"
+              _hover={{ textDecoration: 'none', color: 'red.600' }}
+              fontSize="sm"
+            >
+              🐞 Report Bug
             </Link>
           </Flex>
         )}
@@ -231,6 +242,19 @@ export function Header() {
                 onClick={onClose}
               >
                 Blog
+              </Link>
+
+              <Link
+                href="mailto:ansar_dev@icloud.com?subject=CalcKit.us%20Bug%20Report"
+                p={4}
+                fontWeight="medium"
+                color="red.500"
+                _hover={{ bg: 'red.50', textDecoration: 'none' }}
+                borderBottom="1px solid"
+                borderColor="gray.200"
+                onClick={onClose}
+              >
+                🐞 Report Bug
               </Link>
             </VStack>
           </DrawerBody>
