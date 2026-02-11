@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import { Providers } from "./providers";
 import { Header } from "@/components/layout/Header";
@@ -61,6 +62,15 @@ export default function RootLayout({
       <body style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         {/* Google Analytics - Edit components/shared/GoogleAnalytics.tsx to activate */}
         <GoogleAnalytics />
+        
+        {/* Google AdSense */}
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3219586845995528"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+        
         <Providers>
           <Header />
           <main style={{ flex: 1 }}>{children}</main>
