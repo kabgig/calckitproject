@@ -67,6 +67,20 @@ export default function RootLayout({
           crossOrigin="anonymous"
           strategy="beforeInteractive"
         />
+        
+        {/* Google Funding Choices - GDPR Consent Management */}
+        <Script
+          id="google-fc"
+          src="https://fundingchoicesmessages.google.com/i/pub-3219586845995528?ers=1"
+          strategy="beforeInteractive"
+        />
+        <Script
+          id="google-fc-present"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();`,
+          }}
+        />
       </head>
       <body style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         {/* Google Analytics - Edit components/shared/GoogleAnalytics.tsx to activate */}
