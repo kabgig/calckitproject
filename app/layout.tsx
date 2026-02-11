@@ -59,17 +59,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-        {/* Google Analytics - Edit components/shared/GoogleAnalytics.tsx to activate */}
-        <GoogleAnalytics />
-        
-        {/* Google AdSense */}
+      <head>
+        {/* Google AdSense - Required in head section */}
         <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3219586845995528"
           crossOrigin="anonymous"
-          strategy="afterInteractive"
+          strategy="beforeInteractive"
         />
+      </head>
+      <body style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+        {/* Google Analytics - Edit components/shared/GoogleAnalytics.tsx to activate */}
+        <GoogleAnalytics />
         
         <Providers>
           <Header />
