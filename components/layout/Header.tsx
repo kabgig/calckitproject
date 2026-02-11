@@ -8,6 +8,8 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
+  MenuGroup,
+  MenuDivider,
   IconButton,
   Drawer,
   DrawerBody,
@@ -19,13 +21,21 @@ import {
   VStack,
   Text,
   useBreakpointValue,
+  Badge,
 } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
 import NextLink from 'next/link';
+import {
+  getAllCategories,
+  getCalculatorsByCategory,
+  categoryMeta,
+} from '@/lib/calculators/registry';
 
 export function Header() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const isMobile = useBreakpointValue({ base: true, md: false });
+
+  const categories = getAllCategories();
 
   return (
     <Box
@@ -38,7 +48,7 @@ export function Header() {
       boxShadow="sm"
     >
       <Flex justify="space-between" align="center" maxW="1200px" mx="auto">
-        {/* Logo/Brand - Left on desktop/tablet, center on mobile */}
+        {/* Logo/Brand */}
         <Box flex={isMobile ? '1' : '0'} textAlign={isMobile ? 'center' : 'left'}>
           <Link
             as={NextLink}
@@ -57,7 +67,7 @@ export function Header() {
         {/* Desktop/Tablet Navigation */}
         {!isMobile && (
           <Flex gap={6} align="center">
-            {/* Calculators Dropdown */}
+            {/* Calculators Dropdown – Registry-driven */}
             <Menu>
               <MenuButton
                 as={Link}
@@ -67,25 +77,56 @@ export function Header() {
               >
                 Calculators
               </MenuButton>
-              <MenuList borderRadius={0} border="1px solid" borderColor="black">
+              <MenuList
+                borderRadius="xl"
+                border="1px solid"
+                borderColor="gray.200"
+                boxShadow="lg"
+                py={2}
+                minW="260px"
+              >
+                {/* "View All" link at top */}
                 <MenuItem
                   as={NextLink}
-                  href="/mortgage"
-                  _hover={{ bg: 'gray.100' }}
+                  href="/calculators"
+                  fontWeight="semibold"
+                  _hover={{ bg: 'brand.50' }}
                 >
-                  Mortgage Calculator
+                  View All Calculators
                 </MenuItem>
-                <MenuItem
-                  as={NextLink}
-                  href="/apy"
-                  _hover={{ bg: 'gray.100' }}
-                >
-                  APY Calculator
-                </MenuItem>
+                <MenuDivider />
+
+                {categories.map((cat) => {
+                  const calcs = getCalculatorsByCategory(cat);
+                  if (calcs.length === 0) return null;
+                  const meta = categoryMeta[cat];
+
+                  return (
+                    <MenuGroup
+                      key={cat}
+                      title={meta.label}
+                      fontSize="xs"
+                      fontWeight="bold"
+                      color="gray.500"
+                      textTransform="uppercase"
+                    >
+                      {calcs.map((c) => (
+                        <MenuItem
+                          key={c.slug}
+                          as={NextLink}
+                          href={`/calculators/${c.slug}`}
+                          fontSize="sm"
+                          _hover={{ bg: 'gray.50' }}
+                        >
+                          {c.icon} {c.name}
+                        </MenuItem>
+                      ))}
+                    </MenuGroup>
+                  );
+                })}
               </MenuList>
             </Menu>
 
-            {/* Blog Link (not a dropdown) */}
             <Link
               as={NextLink}
               href="/blog"
@@ -109,52 +150,81 @@ export function Header() {
         )}
       </Flex>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Drawer – Registry-driven */}
       <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
         <DrawerOverlay />
         <DrawerContent borderRadius={0}>
           <DrawerCloseButton />
-          <DrawerHeader borderBottom="1px solid" borderColor="black">
+          <DrawerHeader borderBottom="1px solid" borderColor="gray.200">
             Menu
           </DrawerHeader>
           <DrawerBody p={0}>
             <VStack align="stretch" spacing={0}>
-              <Box
-                borderBottom="1px solid"
-                borderColor="gray.200"
-                p={4}
-                bg="gray.50"
-              >
-                <Text fontWeight="bold" fontSize="sm" color="gray.600">
-                  CALCULATORS
-                </Text>
-              </Box>
+              {/* View All link */}
               <Link
                 as={NextLink}
-                href="/mortgage"
+                href="/calculators"
                 p={4}
-                _hover={{ bg: 'gray.100', textDecoration: 'none' }}
+                fontWeight="semibold"
+                _hover={{ bg: 'brand.50', textDecoration: 'none' }}
                 borderBottom="1px solid"
                 borderColor="gray.200"
                 onClick={onClose}
               >
-                Mortgage Calculator
+                All Calculators
               </Link>
-              <Link
-                as={NextLink}
-                href="/apy"
-                p={4}
-                _hover={{ bg: 'gray.100', textDecoration: 'none' }}
-                borderBottom="1px solid"
-                borderColor="gray.200"
-                onClick={onClose}
-              >
-                APY Calculator
-              </Link>
+
+              {categories.map((cat) => {
+                const calcs = getCalculatorsByCategory(cat);
+                if (calcs.length === 0) return null;
+                const meta = categoryMeta[cat];
+
+                return (
+                  <Box key={cat}>
+                    <Box
+                      borderBottom="1px solid"
+                      borderColor="gray.200"
+                      p={4}
+                      bg="gray.50"
+                    >
+                      <Badge
+                        bg={meta.bg}
+                        color={meta.color}
+                        px={2}
+                        py={0.5}
+                        borderRadius="full"
+                        fontSize="xs"
+                        fontWeight="bold"
+                      >
+                        {meta.label}
+                      </Badge>
+                    </Box>
+                    {calcs.map((c) => (
+                      <Link
+                        key={c.slug}
+                        as={NextLink}
+                        href={`/calculators/${c.slug}`}
+                        p={4}
+                        pl={6}
+                        fontSize="sm"
+                        _hover={{ bg: 'gray.50', textDecoration: 'none' }}
+                        borderBottom="1px solid"
+                        borderColor="gray.100"
+                        onClick={onClose}
+                        display="block"
+                      >
+                        {c.icon} {c.name}
+                      </Link>
+                    ))}
+                  </Box>
+                );
+              })}
+
               <Link
                 as={NextLink}
                 href="/blog"
                 p={4}
+                fontWeight="medium"
                 _hover={{ bg: 'gray.100', textDecoration: 'none' }}
                 borderBottom="1px solid"
                 borderColor="gray.200"

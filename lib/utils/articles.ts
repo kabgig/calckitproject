@@ -8,7 +8,7 @@ export interface ArticleMetadata {
   title: string;
   description: string;
   slug: string;
-  category: 'mortgage' | 'apy';
+  category: string;
   date: string;
   keywords: string[];
 }
@@ -18,52 +18,55 @@ export interface Article {
   content: string;
 }
 
-export function getAllArticles(): ArticleMetadata[] {
-  const articles: ArticleMetadata[] = [];
-  
-  // Read mortgage articles
-  const mortgageDir = path.join(articlesDirectory, 'mortgage');
-  const mortgageFiles = fs.readdirSync(mortgageDir);
-  
-  for (const filename of mortgageFiles) {
-    if (filename.endsWith('.mdx')) {
-      const filePath = path.join(mortgageDir, filename);
-      const fileContents = fs.readFileSync(filePath, 'utf8');
-      const { data } = matter(fileContents);
-      articles.push(data as ArticleMetadata);
-    }
-  }
-  
-  // Read APY articles
-  const apyDir = path.join(articlesDirectory, 'apy');
-  const apyFiles = fs.readdirSync(apyDir);
-  
-  for (const filename of apyFiles) {
-    if (filename.endsWith('.mdx')) {
-      const filePath = path.join(apyDir, filename);
-      const fileContents = fs.readFileSync(filePath, 'utf8');
-      const { data } = matter(fileContents);
-      articles.push(data as ArticleMetadata);
-    }
-  }
-  
-  // Sort by date (newest first)
-  return articles.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+/**
+ * Auto-discover all category directories under content/articles/
+ * and read every .mdx file within them.
+ */
+function discoverCategories(): string[] {
+  if (!fs.existsSync(articlesDirectory)) return [];
+  return fs
+    .readdirSync(articlesDirectory, { withFileTypes: true })
+    .filter((d) => d.isDirectory())
+    .map((d) => d.name);
 }
 
-export function getArticleBySlug(slug: string): Article | null {
-  const categories = ['mortgage', 'apy'];
-  
+export function getAllArticles(): ArticleMetadata[] {
+  const articles: ArticleMetadata[] = [];
+  const categories = discoverCategories();
+
   for (const category of categories) {
     const categoryDir = path.join(articlesDirectory, category);
     const files = fs.readdirSync(categoryDir);
-    
+
+    for (const filename of files) {
+      if (filename.endsWith('.mdx')) {
+        const filePath = path.join(categoryDir, filename);
+        const fileContents = fs.readFileSync(filePath, 'utf8');
+        const { data } = matter(fileContents);
+        articles.push(data as ArticleMetadata);
+      }
+    }
+  }
+
+  // Sort by date (newest first)
+  return articles.sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
+}
+
+export function getArticleBySlug(slug: string): Article | null {
+  const categories = discoverCategories();
+
+  for (const category of categories) {
+    const categoryDir = path.join(articlesDirectory, category);
+    const files = fs.readdirSync(categoryDir);
+
     for (const filename of files) {
       if (filename.endsWith('.mdx')) {
         const filePath = path.join(categoryDir, filename);
         const fileContents = fs.readFileSync(filePath, 'utf8');
         const { data, content } = matter(fileContents);
-        
+
         if (data.slug === slug) {
           return {
             metadata: data as ArticleMetadata,
@@ -73,10 +76,10 @@ export function getArticleBySlug(slug: string): Article | null {
       }
     }
   }
-  
+
   return null;
 }
 
 export function getAllSlugs(): string[] {
-  return getAllArticles().map(article => article.slug);
+  return getAllArticles().map((article) => article.slug);
 }

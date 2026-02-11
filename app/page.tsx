@@ -12,82 +12,92 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { ModernCard } from '@/components/ui/ModernCard';
 import { AdPlaceholder } from '@/components/shared/AdPlaceholder';
-import { getAllArticles } from'@/lib/utils/articles';
+import { getAllArticles } from '@/lib/utils/articles';
+import { calculators, categoryMeta } from '@/lib/calculators/registry';
 
 export const metadata: Metadata = {
   title: 'CalcKit.us - Free Financial Calculators & Expert Guides',
-  description: 'Free mortgage and APY calculators with comprehensive guides. Calculate monthly payments, amortization schedules, compound interest, and more. Make smarter financial decisions with our expert tools and articles.',
+  description: 'Free financial calculators for mortgages, loans, investing, budgeting, and more. Make smarter money decisions with CalcKit.us.',
   openGraph: {
     title: 'CalcKit.us - Free Financial Calculators & Expert Guides',
-    description: 'Free mortgage and APY calculators with comprehensive guides.',
+    description: 'Free financial calculators for mortgages, loans, investing, budgeting, and more.',
     url: 'https://calckit.us',
   },
 };
 
+// Show the first 4 implemented calculators on the homepage
+const featuredSlugs = ['mortgage', 'apy', 'loan-payment', 'compound-interest'];
+const featuredCalcs = featuredSlugs
+  .map((s) => calculators.find((c) => c.slug === s))
+  .filter(Boolean);
+
+const cardBgs = ['purple.50', 'blue.50', 'teal.50', 'pink.50'];
+const cardBorders = ['purple.100', 'blue.100', 'teal.100', 'pink.100'];
+
 export default function Home() {
-  // Get 4 most recent articles
   const recentArticles = getAllArticles().slice(0, 4);
 
   return (
     <Container maxW="container.xl" py={12}>
       <VStack spacing={16} align="stretch">
-        {/* Calculator Teasers */}
+        {/* Calculator Teasers – driven by registry */}
         <Box>
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6}>
-            {/* Mortgage Calculator Card */}
-            <ModernCard p={8} bg="purple.50" border="1px" borderColor="purple.100">
-              <VStack align="stretch" spacing={4} h="100%">
-                <Heading as="h3" size="lg" color="gray.900" fontWeight="bold">
-                  Mortgage Calculator
-                </Heading>
-                <Text color="gray.700" flex={1} fontSize="md">
-                  Calculate your monthly mortgage payment and generate a
-                  complete amortization schedule. See how principal and interest
-                  change over time and export your results to PDF.
-                </Text>
-                <Box>
-                  <Link href="/mortgage" passHref>
-                    <Button
-                      w="full"
-                      size="lg"
-                      bg="brand.500"
-                      color="white"
-                      _hover={{ bg: 'brand.600', transform: 'translateY(-2px)', boxShadow: 'lg' }}
-                    >
-                      Calculate Mortgage Payment →
-                    </Button>
-                  </Link>
-                </Box>
-              </VStack>
-            </ModernCard>
-
-            {/* APY Calculator Card */}
-            <ModernCard p={8} bg="blue.50" border="1px" borderColor="blue.100">
-              <VStack align="stretch" spacing={4} h="100%">
-                <Heading as="h3" size="lg" color="gray.900" fontWeight="bold">
-                  APY Calculator
-                </Heading>
-                <Text color="gray.700" flex={1} fontSize="md">
-                  Calculate Annual Percentage Yield (APY) with different
-                  compounding frequencies. See how your savings grow over time
-                  and compare rates across different accounts.
-                </Text>
-                <Box>
-                  <Link href="/apy" passHref>
-                    <Button
-                      w="full"
-                      size="lg"
-                      bg="brand.500"
-                      color="white"
-                      _hover={{ bg: 'brand.600', transform: 'translateY(-2px)', boxShadow: 'lg' }}
-                    >
-                      Calculate APY →
-                    </Button>
-                  </Link>
-                </Box>
-              </VStack>
-            </ModernCard>
+            {featuredCalcs.map((calc, i) => {
+              if (!calc) return null;
+              return (
+                <ModernCard
+                  key={calc.slug}
+                  p={8}
+                  bg={cardBgs[i % cardBgs.length]}
+                  border="1px"
+                  borderColor={cardBorders[i % cardBorders.length]}
+                >
+                  <VStack align="stretch" spacing={4} h="100%">
+                    <Text fontSize="2xl">{calc.icon}</Text>
+                    <Heading as="h3" size="lg" color="gray.900" fontWeight="bold">
+                      {calc.name}
+                    </Heading>
+                    <Text color="gray.700" flex={1} fontSize="md">
+                      {calc.longDescription}
+                    </Text>
+                    <Box>
+                      <Link href={`/calculators/${calc.slug}`} passHref>
+                        <Button
+                          w="full"
+                          size="lg"
+                          bg="brand.500"
+                          color="white"
+                          _hover={{
+                            bg: 'brand.600',
+                            transform: 'translateY(-2px)',
+                            boxShadow: 'lg',
+                          }}
+                        >
+                          Open {calc.name} →
+                        </Button>
+                      </Link>
+                    </Box>
+                  </VStack>
+                </ModernCard>
+              );
+            })}
           </SimpleGrid>
+
+          {/* "View all" link */}
+          <Box textAlign="center" mt={6}>
+            <Link href="/calculators" passHref>
+              <Button
+                size="md"
+                variant="outline"
+                borderColor="brand.300"
+                color="brand.600"
+                _hover={{ bg: 'brand.50', borderColor: 'brand.400' }}
+              >
+                View All Calculators →
+              </Button>
+            </Link>
+          </Box>
         </Box>
 
         {/* Ad Placeholder */}
