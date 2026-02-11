@@ -11,6 +11,21 @@ export const metadata: Metadata = {
     'savings interest calculator',
     'compound interest rate calculator',
   ],
+  alternates: {
+    canonical: 'https://calckit.us/calculators/apy',
+  },
+  openGraph: {
+    title: 'APY Calculator – Annual Percentage Yield & Growth',
+    description: 'Calculate Annual Percentage Yield (APY) with different compounding frequencies. See how your savings grow over time and compare rates.',
+    url: 'https://calckit.us/calculators/apy',
+    type: 'website',
+    siteName: 'CalcKit.us',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'APY Calculator – Annual Percentage Yield & Growth',
+    description: 'Calculate Annual Percentage Yield (APY) with different compounding frequencies.',
+  },
 };
 
 export default function APYCalculatorPage() {

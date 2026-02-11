@@ -12,6 +12,21 @@ export const metadata: Metadata = {
     'amortization calculator',
     'amortization schedule',
   ],
+  alternates: {
+    canonical: 'https://calckit.us/calculators/mortgage',
+  },
+  openGraph: {
+    title: 'Mortgage Calculator – Monthly Payment & Amortization',
+    description: 'Calculate your monthly mortgage payment and generate a full amortization schedule. See how principal and interest change over time and export to PDF.',
+    url: 'https://calckit.us/calculators/mortgage',
+    type: 'website',
+    siteName: 'CalcKit.us',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Mortgage Calculator – Monthly Payment & Amortization',
+    description: 'Calculate your monthly mortgage payment and generate a full amortization schedule.',
+  },
 };
 
 export default function MortgageCalculatorPage() {

@@ -12,6 +12,21 @@ export const metadata: Metadata = {
     'annualized ROI',
     'investment profit calculator',
   ],
+  alternates: {
+    canonical: 'https://calckit.us/calculators/roi',
+  },
+  openGraph: {
+    title: 'ROI Calculator – Return on Investment',
+    description: 'Calculate your return on investment including total ROI, annualized ROI, and net profit from any investment.',
+    url: 'https://calckit.us/calculators/roi',
+    type: 'website',
+    siteName: 'CalcKit.us',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'ROI Calculator – Return on Investment',
+    description: 'Calculate total ROI, annualized ROI, and net profit from any investment.',
+  },
 };
 
 export default function ROIPage() {

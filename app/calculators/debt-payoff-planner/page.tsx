@@ -12,6 +12,21 @@ export const metadata: Metadata = {
     'debt payoff calculator',
     'debt free calculator',
   ],
+  alternates: {
+    canonical: 'https://calckit.us/calculators/debt-payoff-planner',
+  },
+  openGraph: {
+    title: 'Debt Payoff Planner – Avalanche vs Snowball',
+    description: 'Create a personalized debt payoff plan using avalanche or snowball strategy. See your payoff timeline, total interest, and payment schedule.',
+    url: 'https://calckit.us/calculators/debt-payoff-planner',
+    type: 'website',
+    siteName: 'CalcKit.us',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Debt Payoff Planner – Avalanche vs Snowball',
+    description: 'Create a personalized debt payoff plan using avalanche or snowball strategy.',
+  },
 };
 
 export default function DebtPayoffPlannerPage() {

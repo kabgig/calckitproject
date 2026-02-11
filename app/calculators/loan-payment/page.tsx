@@ -12,6 +12,21 @@ export const metadata: Metadata = {
     'auto loan calculator',
     'student loan calculator',
   ],
+  alternates: {
+    canonical: 'https://calckit.us/calculators/loan-payment',
+  },
+  openGraph: {
+    title: 'Loan Payment Calculator – Monthly Payment & Schedule',
+    description: 'Calculate monthly payments for any loan type—personal, auto, or student. See total interest and generate a full payment schedule.',
+    url: 'https://calckit.us/calculators/loan-payment',
+    type: 'website',
+    siteName: 'CalcKit.us',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Loan Payment Calculator – Monthly Payment & Schedule',
+    description: 'Calculate monthly payments for any loan type. See total interest and payment schedule.',
+  },
 };
 
 export default function LoanPaymentPage() {

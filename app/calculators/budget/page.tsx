@@ -12,6 +12,21 @@ export const metadata: Metadata = {
     'monthly budget calculator',
     'budgeting tool',
   ],
+  alternates: {
+    canonical: 'https://calckit.us/calculators/budget',
+  },
+  openGraph: {
+    title: 'Budget Calculator – 50/30/20 Rule',
+    description: 'Create a simple budget using the 50/30/20 rule. Allocate your monthly income to needs, wants, and savings with customizable percentages.',
+    url: 'https://calckit.us/calculators/budget',
+    type: 'website',
+    siteName: 'CalcKit.us',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Budget Calculator – 50/30/20 Rule',
+    description: 'Create a simple budget using the 50/30/20 rule with customizable percentages.',
+  },
 };
 
 export default function BudgetPage() {

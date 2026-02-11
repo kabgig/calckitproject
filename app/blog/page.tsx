@@ -16,10 +16,26 @@ export async function generateMetadata({
   const params = await searchParams;
   const currentPage = Number(params.page) || 1;
   const pageTitle = currentPage > 1 ? `Financial Guides - Page ${currentPage}` : 'Financial Guides & Tutorials';
+  const pageUrl = currentPage > 1 ? `https://calckit.us/blog?page=${currentPage}` : 'https://calckit.us/blog';
   
   return {
     title: pageTitle,
     description: 'Expert guides on mortgage calculations, APY optimization, and financial planning. Learn how to maximize your savings and make informed home buying decisions.',
+    alternates: {
+      canonical: pageUrl,
+    },
+    openGraph: {
+      title: pageTitle,
+      description: 'Expert guides on mortgage calculations, APY optimization, and financial planning. Learn how to maximize your savings and make informed home buying decisions.',
+      url: pageUrl,
+      type: 'website',
+      siteName: 'CalcKit.us',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: pageTitle,
+      description: 'Expert guides on mortgage calculations, APY optimization, and financial planning.',
+    },
   };
 }
 

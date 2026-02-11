@@ -12,6 +12,21 @@ export const metadata: Metadata = {
     'retirement fund calculator',
     'how much to save for retirement',
   ],
+  alternates: {
+    canonical: 'https://calckit.us/calculators/retirement-savings',
+  },
+  openGraph: {
+    title: 'Retirement Savings Calculator – Plan Your Retirement',
+    description: 'Project your retirement savings balance based on age, contributions, and expected returns. See a year-by-year growth schedule.',
+    url: 'https://calckit.us/calculators/retirement-savings',
+    type: 'website',
+    siteName: 'CalcKit.us',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Retirement Savings Calculator – Plan Your Retirement',
+    description: 'Project your retirement savings balance based on age, contributions, and expected returns.',
+  },
 };
 
 export default function RetirementSavingsPage() {

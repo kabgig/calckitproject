@@ -30,6 +30,21 @@ export const metadata: Metadata = {
     'investment calculator',
     'budget calculator',
   ],
+  alternates: {
+    canonical: 'https://calckit.us/calculators',
+  },
+  openGraph: {
+    title: 'Financial Calculators – Free Tools for Every Money Decision',
+    description: 'Browse 27+ free financial calculators for mortgages, loans, investing, budgeting, income, and debt. Plan smarter with CalcKit.us.',
+    url: 'https://calckit.us/calculators',
+    type: 'website',
+    siteName: 'CalcKit.us',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Financial Calculators – Free Tools for Every Money Decision',
+    description: 'Browse 27+ free financial calculators for mortgages, loans, investing, budgeting, income, and debt.',
+  },
 };
 
 export default function CalculatorsIndexPage() {

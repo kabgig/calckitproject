@@ -12,6 +12,21 @@ export const metadata: Metadata = {
     'credit card interest calculator',
     'debt free calculator',
   ],
+  alternates: {
+    canonical: 'https://calckit.us/calculators/credit-card-payoff',
+  },
+  openGraph: {
+    title: 'Credit Card Payoff Calculator – Debt-Free Timeline',
+    description: 'Calculate how long it will take to pay off your credit card balance. See total interest paid and generate a month-by-month payoff schedule.',
+    url: 'https://calckit.us/calculators/credit-card-payoff',
+    type: 'website',
+    siteName: 'CalcKit.us',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Credit Card Payoff Calculator – Debt-Free Timeline',
+    description: 'Calculate how long it will take to pay off your credit card balance and see total interest.',
+  },
 };
 
 export default function CreditCardPayoffPage() {

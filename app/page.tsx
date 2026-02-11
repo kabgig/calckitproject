@@ -18,10 +18,20 @@ import { calculators, categoryMeta } from '@/lib/calculators/registry';
 export const metadata: Metadata = {
   title: 'CalcKit.us - Free Financial Calculators & Expert Guides',
   description: 'Free financial calculators for mortgages, loans, investing, budgeting, and more. Make smarter money decisions with CalcKit.us.',
+  alternates: {
+    canonical: 'https://calckit.us',
+  },
   openGraph: {
     title: 'CalcKit.us - Free Financial Calculators & Expert Guides',
     description: 'Free financial calculators for mortgages, loans, investing, budgeting, and more.',
     url: 'https://calckit.us',
+    type: 'website',
+    siteName: 'CalcKit.us',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'CalcKit.us - Free Financial Calculators & Expert Guides',
+    description: 'Free financial calculators for mortgages, loans, investing, budgeting, and more.',
   },
 };
 
