@@ -95,13 +95,6 @@ export default function Home() {
 
         {/* Recent Articles */}
         <Box>
-          <Heading as="h2" size="xl" mb={2} color="gray.900" fontWeight="bold">
-            Expert Financial Guides
-          </Heading>
-          <Text fontSize="lg" color="gray.600" mb={6} fontWeight="medium">
-            Learn from comprehensive guides written to help you master financial
-            calculations and planning.
-          </Text>
           <SimpleGrid
             columns={{ base: 1, md: 2, lg: 2 }}
             spacing={6}
