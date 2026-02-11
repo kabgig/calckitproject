@@ -157,3 +157,61 @@ export function formatNumber(value: number, decimals = 0): string {
     maximumFractionDigits: decimals,
   }).format(value);
 }
+
+/**
+ * Solve for number of months to pay off a balance with fixed monthly payment.
+ * n = -ln(1 - balance·r/PMT) / ln(1+r)
+ * Returns Infinity if payment ≤ monthly interest (will never pay off).
+ */
+export function solveForMonths(
+  balance: number,
+  annualRate: number,
+  monthlyPayment: number
+): number {
+  const r = annualRate / 100 / 12;
+  if (r === 0) return Math.ceil(balance / monthlyPayment);
+  const monthlyInterest = balance * r;
+  if (monthlyPayment <= monthlyInterest) return Infinity;
+  return Math.ceil(
+    -Math.log(1 - (balance * r) / monthlyPayment) / Math.log(1 + r)
+  );
+}
+
+/**
+ * Solve for the principal a borrower can afford given a monthly payment.
+ * P = PMT · [(1+r)ⁿ - 1] / [r·(1+r)ⁿ]
+ */
+export function solveForPrincipal(
+  monthlyPayment: number,
+  annualRate: number,
+  totalPayments: number
+): number {
+  const r = annualRate / 100 / 12;
+  if (r === 0) return monthlyPayment * totalPayments;
+  const factor = Math.pow(1 + r, totalPayments);
+  return monthlyPayment * ((factor - 1) / (r * factor));
+}
+
+/**
+ * Solve for required periodic contribution to reach a future value goal.
+ * PMT = (FV − PV·(1+r/n)^(n·t)) / [((1+r/n)^(n·t) − 1) / (r/n)]
+ */
+export function solveForContribution(
+  goalFV: number,
+  currentPV: number,
+  annualRate: number,
+  years: number,
+  compoundsPerYear: number
+): number {
+  const r = annualRate / 100;
+  if (r === 0) {
+    const remaining = goalFV - currentPV;
+    return remaining / (compoundsPerYear * years);
+  }
+  const rn = r / compoundsPerYear;
+  const nt = compoundsPerYear * years;
+  const factor = Math.pow(1 + rn, nt);
+  const fvLump = currentPV * factor;
+  const remaining = goalFV - fvLump;
+  return remaining / ((factor - 1) / rn);
+}
