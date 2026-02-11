@@ -31,41 +31,8 @@ export default function Home() {
   return (
     <Container maxW="container.xl" py={12}>
       <VStack spacing={16} align="stretch">
-        {/* Hero Section */}
-        <Box
-          textAlign="center"
-          py={16}
-          px={8}
-          bgGradient="linear(to-br, brand.50, purple.50, blue.50)"
-          borderRadius="3xl"
-        >
-          <Heading
-            as="h1"
-            fontSize={{ base: '4xl', md: '5xl', lg: '6xl' }}
-            mb={4}
-            fontWeight="extrabold"
-            bgGradient="linear(to-r, brand.600, purple.600)"
-            bgClip="text"
-          >
-            CalcKit.us
-          </Heading>
-          <Text
-            fontSize={{ base: 'lg', md: 'xl' }}
-            color="gray.700"
-            maxW="2xl"
-            mx="auto"
-          >
-            Free financial calculators and expert guides to help you make
-            smarter money decisions. Calculate mortgages, savings yields, and
-            more.
-          </Text>
-        </Box>
-
         {/* Calculator Teasers */}
         <Box>
-          <Heading as="h2" size="xl" mb={6} color="gray.900" fontWeight="bold">
-            Financial Calculators
-          </Heading>
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6}>
             {/* Mortgage Calculator Card */}
             <ModernCard p={8} bg="purple.50" border="1px" borderColor="purple.100">
@@ -81,7 +48,6 @@ export default function Home() {
                 <Box>
                   <Link href="/mortgage" passHref>
                     <Button
-                      as="a"
                       w="full"
                       size="lg"
                       bg="brand.500"
@@ -109,7 +75,6 @@ export default function Home() {
                 <Box>
                   <Link href="/apy" passHref>
                     <Button
-                      as="a"
                       w="full"
                       size="lg"
                       bg="brand.500"
@@ -176,12 +141,11 @@ export default function Home() {
                   </Text>
                   <Link href={`/blog/${article.slug}`} passHref>
                     <Button
-                      as="a"
                       size="sm"
                       variant="outline"
                       borderColor="gray.300"
                       color="gray.700"
-                      _hover={{ bg: 'gray. 100', borderColor: 'gray.400' }}
+                      _hover={{ bg: 'gray.100', borderColor: 'gray.400' }}
                     >
                       Read Article →
                     </Button>
@@ -193,7 +157,6 @@ export default function Home() {
           <Box textAlign="center">
             <Link href="/blog" passHref>
               <Button
-                as="a"
                 size="lg"
                 variant="outline"
                 borderColor="gray.300"

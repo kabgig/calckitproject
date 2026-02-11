@@ -11,24 +11,24 @@ export default function NotFound() {
   return (
     <Container maxW="container.md" py={20}>
       <VStack spacing={6} textAlign="center">
-        <Heading as="h1" size="3xl" color="black">
+        <Heading as="h1" size="3xl" color="gray.900" fontWeight="extrabold">
           404
         </Heading>
-        <Heading as="h2" size="xl" color="black">
+        <Heading as="h2" size="xl" color="gray.800" fontWeight="bold">
           Page Not Found
         </Heading>
-        <Text fontSize="lg" color="gray.700">
+        <Text fontSize="lg" color="gray.600">
           Sorry, the page you are looking for doesn't exist or has been moved.
         </Text>
         <Box pt={4}>
           <Link href="/" passHref>
             <Button
-              as="a"
               size="lg"
-              bg="black"
+              bg="brand.500"
               color="white"
-              borderRadius={0}
-              _hover={{ bg: 'gray.800' }}
+              borderRadius="lg"
+              _hover={{ bg: 'brand.600', transform: 'translateY(-2px)', boxShadow: 'lg' }}
+              transition="all 0.2s"
             >
               Go to Home Page
             </Button>

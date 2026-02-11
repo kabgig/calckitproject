@@ -225,7 +225,6 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
             </Text>
             <Link href={relatedCalculator.url} passHref>
               <Button
-                as="a"
                 size="lg"
                 bg="brand.500"
                 color="white"
@@ -243,7 +242,6 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           <Box textAlign="center" mt={4}>
             <Link href="/blog" passHref>
               <Button
-                as="a"
                 variant="outline"
                 borderColor="gray.300"
                 color="gray.700"

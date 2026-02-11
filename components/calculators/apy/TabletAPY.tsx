@@ -19,6 +19,7 @@ import { ModernButton } from '@/components/ui/ModernButton';
 import { ModernCard } from '@/components/ui/ModernCard';
 import { ModernTable } from '@/components/ui/ModernTable';
 import { PDFExportButton } from '@/components/calculators/shared/PDFExportButton';
+import { AdPlaceholder } from '@/components/shared/AdPlaceholder';
 import { apySchema, type APYFormData } from '@/lib/validation';
 import { calculateAPY, generateAPYGrowthTable, type GrowthRow } from '@/lib/utils/calc';
 
@@ -179,6 +180,11 @@ export function TabletAPY() {
           />
         </Box>
       )}
+
+      {/* Ad Space */}
+      <Box pt={8}>
+        <AdPlaceholder variant="horizontal" size="md" />
+      </Box>
     </Box>
   );
 }
